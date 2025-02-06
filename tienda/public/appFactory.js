@@ -3,10 +3,10 @@
 
 angular
   .module('miApp')
-  .factory('appFactory', appfactory)
+  .factory('appFactory', appFactory)
 
 /** @ngInject */
-function appfactory($rootScope, $state, $q) {
+function appFactory($rootScope, $state, $q) {
   let dato = {
       mensaje: function (mensaje, estado, tipo, title) {
           // Función auxiliar para mostrar mensajes con SweetAlert

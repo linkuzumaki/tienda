@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('productoModule.crearProducto',['productoModule.calculoFactory','miAPP'])
+        .module('productoModule.crearProducto',['productoModule.calculoFactory'])
         .controller('CrearProductoController', CrearProductoController)
         CrearProductoController.$inject = ['$scope','$rootScope','$state','productodb','calculosFactory','appFactory'];
     /** @ngInject */

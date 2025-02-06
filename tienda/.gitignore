@@ -1,1 +1,3 @@
 tienda/servidor/node_modules/
+tienda/public/node_modules/
+tienda/public/package-lock.json
