@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<div class="container-fluid">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" ui-sref="app.productos.listado" ui-sref-active="active">Lista de Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" ui-sref="app.productos.crear" ui-sref-active="active">Crear Producto</a>
+        </li>
+    </ul>
+
+    <!-- Contenedor donde se cargarán las pestañas -->
+    <div class="tab-content mt-3">
+        <div ui-view></div>
+    </div>
+</div>

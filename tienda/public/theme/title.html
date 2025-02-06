@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div class="row" ng-hide="ocultar_bread_title">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a ui-sref="app.home" ui-sref-active="cls_active">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item" ng-class="{'active': item.active}" ng-repeat="item in breadcrumbs track by $index" ng-if="item.name!== 'Inicio'">
+                        <a ui-sref="{{item.ruta}}" ui-sref-opts="{ reload: true }" ng-if="item.padre && breadcrumbs.length > 1 && item.name !== 'Inicio'"><span>{{item.name}}</span></a>
+                        <span  ng-if="item.padre && breadcrumbs.length == 1 && item.name !== 'Inicio'">{{item.name}}</span>
+                        <span ng-if="!item.padre && breadcrumbs.length > 1 ">{{item.name}}</span>
+                    </li>
+                </ol>
+            </div>
+            
+            <h4 class="page-title">{{titulo}}</h4>
+        </div>
+        <!--end page-title-box-->
+    </div>
+    <!--end col-->
+</div>

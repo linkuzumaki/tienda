@@ -1,0 +1,33 @@
+{
+  "name": "angular-flatpickr",
+  "version": "3.6.0",
+  "homepage": "https://github.com/archsaber/angular-flatpickr",
+  "authors": [
+    "opavader <ashish@archsaber.com>"
+  ],
+  "description": "angular directive for flatpickr",
+  "main": "dist/ng-flatpickr.js",
+  "keywords": [
+    "date-picker",
+    "angular",
+    "flatpickr"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "^1.3.0",
+    "flatpickr": "4.5.1"
+  },
+  "_release": "3.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.6.0",
+    "commit": "a8f4e60b5642aa62dfd575c3e1f2af34216390ec"
+  },
+  "_source": "https://github.com/archsaber/angular-flatpickr.git",
+  "_target": "^3.6.0",
+  "_originalSource": "angular-flatpickr"
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<div class="topbar">
+    <!-- Navbar -->
+    <nav class="navbar-custom" id="navbar-custom">
+        <ul class="list-unstyled topbar-nav float-start mb-0">
+            <li>
+                <h4 ng-if="verhome">Productos</h4>
+                <h4 ng-if="!verhome">Ventas</h4>
+            </li>
+        </ul>
+        <ul class="list-unstyled topbar-nav float-end mb-0">
+            <li ng-if="!verhome">
+                <a class="nav-link arrow-none nav-icon" ui-sref="app.productos.listado"><i class="fa-solid fa-barcode"></i></a>
+            </li>
+            <li ng-if="verhome">
+                <a class="nav-link arrow-none nav-icon" ui-sref="app.home"><i class="fa-solid fa-house"></i></a>
+            </li>
+            <li class="notification-list">
+                <a class="nav-link arrow-none nav-icon offcanvas-btn" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#Appearance" role="button" aria-controls="Rightbar">
+                    <i class="ti ti-settings ti-spin"></i>
+                </a>
+            </li>
+        </ul><!--end topbar-nav-->
+
+        <ul class="list-unstyled topbar-nav mb-0">
+            <li ng-show="bars">
+                <button class="nav-link button-menu-mobile nav-icon"  id="togglemenu" ng-click="abrirMenu()">
+                    <i class="ti ti-menu-2"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+    <!-- end navbar-->
+</div>

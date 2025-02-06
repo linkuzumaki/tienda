@@ -1,0 +1,42 @@
+{
+  "Encabezado": {
+    "IdDoc": {
+      "TipoDTE": 39,
+      "Folio": 123456,
+      "FchEmis": "2025-01-29"
+    },
+    "Emisor": {
+      "RUTEmisor": "12345678-9",
+      "RznSoc": "Mi Empresa S.A.",
+      "GiroEmis": "Venta de productos",
+      "Acteco": 123456,
+      "DirOrigen": "Av. Principal 123, Santiago",
+      "CmnaOrigen": "Santiago"
+    },
+    "Receptor": {
+      "RUTRecep": "11111111-1",
+      "RznSocRecep": "Juan Pérez",
+      "DirRecep": "Calle Falsa 456",
+      "CmnaRecep": "Providencia"
+    }
+  },
+  "Detalle": [
+    {
+      "NroLinDet": 1,
+      "NmbItem": "Producto A",
+      "QtyItem": 2,
+      "PrcItem": 10000,
+      "MontoItem": 20000
+    },
+    {
+      "NroLinDet": 2,
+      "NmbItem": "Producto B",
+      "QtyItem": 1,
+      "PrcItem": 5000,
+      "MontoItem": 5000
+    }
+  ],
+  "Totales": {
+    "MntTotal": 25000
+  }
+}

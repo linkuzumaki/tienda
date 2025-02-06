@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<div>
+    <form class="was-validated" name="registroForm" novalidate>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="mb-3 col-6 row">
+                        <label class="col-2 col-form-label" for="nomb_prod">Nombre:</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="nombreProd" id="nomb_prod"
+                                ng-model="producto.nombre" required minlength="3" maxlength="50"
+                                pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+">
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.nombreProd.$error.required">Nombre del producto es
+                                requerido.</span>
+                            <span ng-show="registroForm.nombreProd.$error.minlength">El nombre del producto debe tener
+                                al menos 3 caracteres.</span>
+                            <span ng-show="registroForm.nombreProd.$error.maxlength">El nombre del producto debe tener
+                                como máximo 50 caracteres.</span>
+                            <span ng-show="registroForm.nombreProd.$error.pattern">Solo se permiten letras, números,
+                                espacios y / .</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-6 row">
+                        <label class="col-2 col-form-label" for="cod_prod">Codigo:</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="cogProd" id="cod_prod"
+                                ng-model="producto.codigo" minlength="10" maxlength="15" pattern="[a-zA-Z0-9]+"
+                                required>
+
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.cogProd.$error.required">El código del producto es
+                                requerido.</span>
+                            <span ng-show="registroForm.cogProd.$error.minlength">El código del producto debe tener
+                                al menos 10 caracteres.</span>
+                            <span ng-show="registroForm.cogProd.$error.maxlength">El código del producto debe tener
+                                como máximo 15 caracteres.</span>
+                            <span ng-show="registroForm.cogProd.$error.pattern">Solo se permiten letras y
+                                números.</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-6 row">
+                        <label class="col-2 col-form-label" for="descripcion_prod">Descripcion:</label>
+                        <div class="col-10">
+                            <textarea class="form-control" name="descripcionProd" id="descripcion_prod" rows="5"
+                                cols="6" ng-model="producto.descripcion" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+"
+                                required></textarea>
+
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.descripcionProd.$error.pattern">Solo se permiten letras,
+                                números, espacios y /.</span>
+                            <small ng-show="registroForm.descripcionProd.$error.required">La descripción del
+                                producto es requerida.</small>
+                            <small ng-show="registroForm.descripcionProd.$error.minlength">La descripción del
+                                producto debe tener al menos 5 caracteres.</small>
+                            <small ng-show="registroForm.descripcionProd.$error.maxlength">La descripción del
+                                producto debe tener como máximo 250 caracteres.</small>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-6 row">
+                        <label class="col-2 col-form-label" for="cat_prod">Categoria:</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="categoriaProd" id="cat_prod"
+                                ng-model="producto.categoria" minlength="5" maxlength="15"
+                                pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+" required>
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.categoriaProd.$error.required">La categoría del producto es
+                                requerida.</span>
+                            <span ng-show="registroForm.categoriaProd.$error.minlength">La categoría del producto
+                                debe tener al menos 5 caracteres.</span>
+                            <span ng-show="registroForm.categoriaProd.$error.maxlength">La categoría del producto
+                                debe tener como máximo 15 caracteres.</span>
+                            <span ng-show="registroForm.categoriaProd.$error.pattern">Solo se permiten letras y
+                                números.</span>
+                        </small>
+                        <label class="col-2 col-form-label" for="marca_prod">Marca:</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" name="marcaProd" id="marca_prod"
+                                ng-model="producto.marca" minlength="5" maxlength="15"
+                                pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+" required>
+
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.marcaProd.$error.required">La marca del producto es
+                                requerida.</span>
+                            <span ng-show="registroForm.marcaProd.$error.minlength">La marca del producto debe tener
+                                al menos 5 caracteres.</span>
+                            <span ng-show="registroForm.marcaProd.$error.maxlength">La marca del producto debe tener
+                                como máximo 15 caracteres.</span>
+                            <span ng-show="registroForm.marcaProd.$error.pattern">Solo se permiten letras y
+                                números.</span>
+                        </small>
+                    </div>
+                    <hr>
+                    <div class="mb-3 col-3 row">
+                        <label class="form-label" for="precio_bruto_prod">Precio bruto:</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="precio_">$</span>
+                            <input type="number" class="form-control" ng-change="producto.precio_neto=0"
+                                name="preciobrProd" id="precio_bruto_prod" ng-model="producto.precio_bruto"
+                                aria-describedby="precio_" min="10" pattern="[0-9]+" required>
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.preciobrProd.$error.required">El precio bruto es
+                                requerido.</span>
+                            <span ng-show="registroForm.preciobrProd.$error.min">El precio bruto debe ser mayor o
+                                igual a 10.</span>
+                            <span ng-show="registroForm.preciobrProd.$error.pattern">Solo se permiten
+                                números.</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-3 row">
+                        <label class="form-label" for="ganancia_prod">Ganancia:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" ng-change="producto.precio_neto=0"
+                                name="gananciaProd" id="ganancia_prod" ng-model="producto.ganancia"
+                                aria-describedby="ganancia_" min="0" pattern="[0-9]+">
+                            <span class="input-group-text" id="ganancia_">%</span>
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.gananciaProd.$error.min">La ganancia debe ser mayor o igual a
+                                0.</span>
+                            <span ng-show="registroForm.gananciaProd.$error.pattern">Solo se permiten números.</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-2">
+                        <label  class="form-label" for="cant_prod"> Cantidad :</label>
+                        <div class="input-group">
+                            <input type="number" name="cantProd" class="form-control" id="cant_prod" ng-model="producto.cantidad"
+                                aria-describedby="cant_" min="1" pattern="[0-9]+" required>
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.cantProd.$error.required">La cantidad es requerida.</span>
+                            <span ng-show="registroForm.cantProd.$error.min">La cantidad debe ser mayor o igual a 1.</span>
+                            <span ng-show="registroForm.cantProd.$error.pattern">Solo se permiten números.</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label  class="form-label" for="select_tipo"> vender por  :</label>
+                        <div class="input-group">
+                            <select class="form-select" id="select_tipo" name="tipoProd" ng-model="producto.tipoVenta" required>
+                                <option value="" disabled selected>Seleccione un tipo...</option>
+                                <option value="unidad">Unidad</option>
+                                <option value="metro">Metros</option>
+                                <option value="litros">Litros</option>
+                                <option value="kilos">Kilos</option>
+                            </select>
+                            
+                        </div>
+                        <small class="text-danger text-end">
+                            <span ng-show="registroForm.tipoProd.$error.required">El tipo de venta es requerido.</span>
+                        </small>
+                    </div>
+                    <div class="mb-3 col-1 d-flex align-items-center">
+                        <div class="form-check form-switch mt-4">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                ng-model="producto.descuento_estado" ng-change="producto.precio_neto=0">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Agregar descuento</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 col-12 row" ng-if="producto.descuento_estado">
+                        <div class="mb-3 col-3 row">
+                            <div class="input-group">
+                                <label class="form-label" for="descuento_prod">Descuento:</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" ng-change="producto.precio_neto=0"
+                                        name="descuentoProd" id="descuento_prod" ng-model="producto.descuento"
+                                        aria-describedby="descuento_" min="1" max="100" pattern="[0-9]+"
+                                        ng-required="producto.descuento_estado">
+                                    <span class="input-group-text" id="descuento_">%</span>
+                                </div>
+                            </div>
+                            <small class="text-danger text-end">
+                                <span ng-show="registroForm.descuentoProd.$error.required">El descuento es
+                                    requerido.</span>
+                                <span ng-show="registroForm.descuentoProd.$error.min">El descuento debe ser
+                                    mayor o igual a 1.</span>
+                                <span ng-show="registroForm.descuentoProd.$error.max">El descuento debe ser
+                                    menor o igual a 100.</span>
+                                <span ng-show="registroForm.descuentoProd.$error.pattern">Solo se permiten
+                                    números.</span>
+                            </small>
+                        </div>
+                        <div class="mb-3 col-3 row">
+                            <label class="form-label" for="date_ini_prod">Fecha Inicio:</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" name="dateIniProd" id="date_ini_prod"
+                                    ng-model="producto.fechaI" ng-change="actualizarMinFechaFinal()"
+                                    min="{{hoy | date:'yyyy-MM-dd'}}" aria-describedby="fechai_"
+                                    ng-required="producto.descuento_estado">
+                                <span class="input-group-text" id="fechai_">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                            <small class="text-danger text-end">
+                                <span ng-show="registroForm.dateIniProd.$error.required">La fecha de inicio es
+                                    requerida.</span>
+                                <span ng-show="producto.fechaI > producto.fechaF">La fecha de inicio debe ser menor
+                                    o igual a la fecha de final.</span>
+                            </small>
+                        </div>
+                        <div class="mb-3 col-3 row">
+                            <label class="form-label" for="date_end_prod">Fecha Final:</label>
+                            <div class="input-group">
+                                <input type="date" class="form-control" name="dateEndProd" id="date_end_prod"
+                                    ng-model="producto.fechaF" min="{{producto.fechaI | date:'yyyy-MM-dd'}}"
+                                    aria-describedby="fechaf_" ng-required="producto.descuento_estado">
+                                <span class="input-group-text" id="fechaf_">
+                                    <i class="fa fa-calendar"></i>
+                                </span>-
+                            </div>
+                            <small class="text-danger text-end">
+                                <span ng-show="registroForm.dateEndProd.$error.required">La fecha de final es
+                                    requerida.</span>
+                                <span ng-show="producto.fechaF < producto.fechaI">La fecha de final debe ser mayor o
+                                    igual a la fecha de inicio.</span>
+                            </small>
+                        </div>
+                        <br>
+
+                    </div>
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 w-100 bd-highlight"></div>
+                        <div class="p-2 flex-shrink-1 bd-highlight">
+                            <div class="float-end mb-3">
+                                <button class="btn btn-outline-info" ng-show="producto.precio_bruto > 0"
+                                    ng-click="calcularNeto(producto.precio_bruto,producto.ganancia,producto.descuento_estado,producto.descuento)">
+                                    Calcular <i class="fa fa-calculator"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr ng-show="producto.precio_neto > 0">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border col-12" role="status" ng-show="loadTableCalculos">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div ng-show="producto.precio_neto > 0" class="col-6">
+                            <table class="table table-bordered " ng-hide="loadTableCalculos ">
+                                <thead style="background: #333a4e;">
+                                    <th style="border-color: #434141;">información</th>
+                                    <th style="border-color: #434141;width: 250px;">
+                                        <p class="text-center text-capitalize">sin descuento</p>
+                                    </th>
+                                    <th style="border-color: #434141; width: 250px;" ng-if="producto.descuento_estado">
+                                        <p class="text-center text-capitalize">con <span
+                                                style="color: tomato;">{{producto.descuento}}%</span> descuento </p>
+                                        <p class="text-center fs-5 ">
+                                            Comienza : <span class="text-info fw-bold"> {{producto.fechaI |
+                                                formatofecha:'ll' }} </span>
+                                            <br>
+                                            duración de : <span
+                                                class="text-info fw-bold">{{producto.duracion_descuento}}</span>
+                                        </p>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> precio bruto</td>
+                                        <td>
+                                            <p class="float-end"> {{producto.precio_bruto | formatoPrecio }}</p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"> {{producto.precio_bruto | formatoPrecio }}</p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>ganancia</td>
+                                        <td>
+                                            <p class="float-end"> <span class="text-success"> +
+                                                    {{producto.precio_ganancia | formatoPrecio}} </span> </p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"> <span class="text-success"> +
+                                                    {{producto.precio_ganancia_des | formatoPrecio}} </span> </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>iva</td>
+                                        <td>
+                                            <p class="float-end"> <span class="text-success"> +
+                                                    {{producto.precio_iva | formatoPrecio }} </span> </p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"> <span class="text-success"> +
+                                                    {{producto.precio_iva_des | formatoPrecio }} </span> </p>
+                                        </td>
+                                    </tr>
+                                    <tr style="background: #616570;">
+                                        <td>Total Neto</td>
+                                        <td>
+                                            <p class="float-end ">{{producto.precio_bruto + producto.precio_ganancia +
+                                                producto.precio_iva
+                                                | formatoPrecio}}</p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"><span> {{producto.precio_bruto +
+                                                    producto.precio_ganancia_des + producto.precio_iva_des |
+                                                    formatoPrecio }}</span> </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>descuento</td>
+                                        <td>
+                                            <p class="float-end"> 0</p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"> <span class="text-warning"> -
+                                                    {{producto.precio_descuento | formatoPrecio }} </span> </p>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="background: #333a4e;">
+                                        <td>precio</td>
+                                        <td>
+                                            <p class="float-end"> <span class="text-info"> {{producto.precio_neto |
+                                                    formatoPrecio }}</span> </p>
+                                        </td>
+                                        <td ng-if="producto.descuento_estado">
+                                            <p class="float-end"> <span class="text-info">
+                                                    {{producto.precio_neto_des | formatoPrecio }}</span> </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button ng-show="producto.precio_neto > 0" type="button" ng-click="guardarProducto(producto)"
+                        ng-disabled="registroForm.$invalid || loadSaveProd" class="btn btn-primary float-end">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" ng-if="loadSaveProd"></span>
+                        <span ng-if="loadSaveProd == false">Guardar</span>
+                        <span ng-if="loadSaveProd" class="sr-only">guardando...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

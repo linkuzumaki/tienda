@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div id="grid" class="row g-0">
+                            <div class="container-image col-12 m-0 p-0" ng-repeat="file in aviso.imagenes">
+                                <img ng-src="{{file}}" alt="Avatar" class="image" style="height:270px;width: 100%;">
+                                <div class="middle row">
+                                    <div class="btn-group" role="group" aria-label="accion_galeria">
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="showImage(file)"><i
+                                                class="fa fa-expand" title="Abrir Lightbox"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-lg-9">
+                        <div class="">
+                            <span class="badge badge-soft-danger font-13 fw-semibold mb-2"></span>
+                            <p>Perdido: {{aviso.fecha | formatofecha}}</p>
+                            <h5 class="font-24 mb-0">{{aviso.nombre}}</h5>
+                            <p class="text-muted mb-2">{{aviso.descripcion}}</p>
+                            <ul class="list-inline mb-2">
+                                <li class="list-inline-item">4.5 (9830 reviews)</li>
+                            </ul>
+                            <h6 class="font-20 fw-bold">$89.00 <span
+                                    class="font-14 text-muted fw-semibold"><del>$180.00</del></span><span
+                                    class="text-danger font-14 fw-semibold ms-2">50% Off</span></h6>
+                            <h6 class="font-13">Detail :</h6>
+                            <p class="text-muted">There are many variations of passages of Lorem Ipsum available,
+                                but the majority have suffered alteration in some form,
+                                by injected humour, or randomised words which don't look.
+                            </p>
+                            <h6 class="font-13">Features :</h6>
+                            <ul class="list-unstyled border-0">
+                                <li class="mb-2"><i class="las la-check-circle text-success me-1"></i>It is a long
+                                    established fact that a reader will be distracted.</li>
+                                <li class="mb-2"><i class="las la-check-circle text-success me-1"></i>Contrary to popular
+                                    belief, Lorem Ipsum is not text. </li>
+                                <li><i class="las la-check-circle text-success me-1"></i>There are many variations of
+                                    passages of Lorem Ipsum available. </li>
+                            </ul>
+                            <div class="mt-3">
+                                <input class="form-control form-control-sm d-inline-block" style="width:100px;"
+                                    type="number" min="0" value="0" id="example-number-input">
+                                <a href="" class="btn btn-de-primary btn-sm px-4 d-inline-block"><i
+                                        class="mdi mdi-cart me-2"></i>Add to Cart</a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+                
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div>
+</div>

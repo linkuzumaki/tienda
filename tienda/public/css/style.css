@@ -1,0 +1,130 @@
+.m-pointer {
+    cursor: pointer;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: blue;
+}
+
+nav button {
+    margin-left: 15px;
+}
+.chat-box-right .chat-footer .chat-features label {
+    color: #7081b9;
+    font-size: 22px;
+    margin-left: 12px;
+}
+.chat-features {
+    display: flex;
+    align-items: center;
+    /* Alinea los elementos verticalmente al centro */
+    justify-content: flex-start;
+    /* Alinea los elementos al inicio horizontalmente */
+    gap: 10px;
+    /* Espaciado entre los elementos */
+}
+
+.chat-features a,
+.chat-features .dropdown,
+.chat-features label {
+    display: inline-flex;
+    /* Asegura que cada elemento se comporte como inline-flex */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    /* Sin subrayado en enlaces */
+    color: inherit;
+    /* Mantiene el color del diseño */
+}
+
+.chat-features .dropdown-menu {
+    margin: 0;
+    /* Eliminar márgenes extras */
+    padding: 0;
+    /* Eliminar relleno extra */
+    list-style: none;
+    /* Sin viñetas */
+}
+
+.adjunto-label {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.chat-features input[type="file"] {
+    display: none;
+    /* Ocultar el input */
+}
+
+.chat-features i {
+    font-size: 1.5rem;
+    /* Ajusta el tamaño de los íconos */
+    margin: 0;
+    /* Elimina márgenes para mejor alineación */
+}
+/* Contenedor de los botones */
+.button-container {
+    position: relative;
+    margin-top: 0px;
+}
+
+/* Estilo para los botones circulares */
+.extra-buttons {
+    position: fixed;
+    right: 20px;
+    display: none;
+    bottom: 105px;
+    /* Inicia oculto */
+    flex-direction: column;
+}
+
+.circle-btn {
+    width: 50px;
+    height: 50px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    /* Hace que el botón sea circular */
+    font-size: 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Cambia el color al pasar el mouse */
+.circle-btn:hover {
+    background-color: orangered;
+}
+
+/* Botón principal */
+#mainButton {
+    position: absolute;
+    display: block;
+    margin: 3px;
+    font-size: 16px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#mainButton:hover {
+    background-color: orangered;
+}
+.swal-text-color {
+    color: tomato !important; /* Rojo */
+    font-weight: bold;
+}

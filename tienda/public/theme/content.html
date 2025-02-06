@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<h3>content</h3>
+<!-- ========== Left Sidebar Start ========== -->
+<div ng-include="'theme/navigation.html'"></div>
+<div ng-include="'theme/topnavbar.html'"></div>
+<!-- Left Sidebar End -->
+<div class="page-wrapper">
+    <!-- Page Content-->
+    <div class="page-content-tab mt-1">
+        <div class="container-fluid">
+            <div ng-include="'theme/title.html'"></div>
+            <div ui-view></div>
+        </div>
+        <div ng-include="'theme/rightbar.html'"></div>
+        <div ng-include="'theme/footer.html'"></div>
+    </div>
+</div>
+
+
+
+

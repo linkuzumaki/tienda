@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<h1>estamos en home</h1>
+<section>
+    <button class="btn btn-outline-secondary" ng-click="iniciar_venta()">NUEVA ventas</button>
+    <div class="row">
+        <div class="col-sm-6" ng-repeat="venta in ventas track by $index">
+            <button class="btn btn-primary">tomar codigo</button>
+            <h2> carro {{$index + 1}}</h2>
+            <ul>
+                <li>Producto 1</li>
+                <li>Producto 2</li>
+                <li>Producto 3</li>
+            </ul>
+        </div>
+       
+    </div>
+</section>
+<div ui-view></div>
+
