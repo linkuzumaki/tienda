@@ -22,11 +22,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Middleware para interpretar JSON en el body
 app.use(express.json()); // ¡IMPORTANTE! Sin esto, req.body será undefined
-// Configuración de HTTPS con los archivos generados
-const options = {
-  key: fs.readFileSync('./cert/key.pem'),
-  cert: fs.readFileSync('./cert/cert.pem')
-};
+
 // cargamos los controladores
 import contabilidadCtrl from './controllers/contabilidadCtrl.js';
 import productosCtrl from './controllers/productosCtrl.js';
