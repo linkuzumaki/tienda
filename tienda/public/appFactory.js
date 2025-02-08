@@ -3,7 +3,7 @@
 
 angular
   .module('miApp')
-  .factory('appFactory', appFactory)
+  .factory('appFactory', appFactory);
 
 /** @ngInject */
 function appFactory($rootScope, $state, $q) {
@@ -12,6 +12,15 @@ function appFactory($rootScope, $state, $q) {
           // Función auxiliar para mostrar mensajes con SweetAlert
           const mostrarMensaje = (icono, titulo, texto) => {
               swal.fire({ icon: icono, title: titulo, text: texto });
+          };
+
+          const mensajeReturn = (icono, titulo) => {
+            return Swal.fire({
+                title: titulo,
+                icon: icono,
+                showCancelButton: true,
+                confirmButtonText: "Sí, eliminar",
+            });
           };
 
           // Configuración de los mensajes según tipo y estado
@@ -26,14 +35,18 @@ function appFactory($rootScope, $state, $q) {
                   1: () => mostrarMensaje('warning', `Problema en: ${title}`, mensaje),
                   2: () => mostrarMensaje('success', title, mensaje)
               },
-              return: {
-                  0: () => { /* Acción para return estado 0 */ },
-                  1: () => { /* Acción para return estado 1 */ },
-                  2: () => { /* Acción para return estado 2 */ }
+              confirm: {
+                  3: () => { 
+                      return mensajeReturn('info', title);
+                  }
               }
           };
 
           // Ejecutar la acción si existe
+          if (tipo === 'confirm' && estado === 3) {
+              return acciones[tipo][estado]();
+          }
+
           acciones[tipo]?.[estado]?.();
       }
   };

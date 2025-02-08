@@ -52,6 +52,29 @@
                 });
             return promise;
         };
+        this.actualizarProducto =function(producto){
+            var defered = $q.defer();
+            var promise = defered.promise;
+            $http.put(`/actualizar/producto/${producto._id}`, producto)
+                .then(function (response) {
+                    defered.resolve(response.data);
+                })
+                .catch(function (err) {
+                    defered.reject(err);
+                });
+            return promise;    
+        };
+        this.eliminarProducto=function(prodID){
+            var defered = $q.defer();
+            var promise = defered.promise;
+            $http.delete(`/eliminar/producto/${prodID}`)
+                .then(function (response) {
+                    defered.resolve(response.data);
+                }, function (err) {
+                    defered.reject(err);
+                });
+            return promise;
+        }
     }
 
 }());

@@ -6,22 +6,42 @@
             <div class="accordion-item" ng-repeat="producto in listaProductos track by $index">
                 <h2 class="accordion-header w-100 mx-1 my-0" id="heading{{$index}}">
                     <div class="d-flex align-items-center">
-                        <button class="accordion-button collapsed flex-grow-1 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#prod-collapse{{$index}}" aria-expanded="false" aria-controls="prod-collapse{{$index}}">
-                            <h4 class="p-1 text-capitalize"><b>Nombre: </b>{{producto.nombre}}</h4>
-                            <h4 class="p-1 text-capitalize"><b>Marca: </b>{{producto.marca}}</h4>
-                            <h4 class="p-1 text-capitalize"><b>Categoría: </b>{{producto.categoria || 'Sin categoría'}}</h4>
+                        <button class="accordion-button collapsed flex-grow-1 p-0"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#prod-collapse{{$index}}"
+                            aria-expanded="false"
+                            aria-controls="prod-collapse{{$index}}"
+                            ng-click="seleccionandoProd(producto)">
+
+                            <h4 class="p-1 text-capitalize"><b>Nombre: </b>{{productoTemporal.nombre || producto.nombre}}</h4>
+                            <h4 class="p-1 text-capitalize"><b>Marca: </b>{{productoTemporal.marca || producto.marca}}</h4>
+                            <h4 class="p-1 text-capitalize"><b>Categoría: </b>{{productoTemporal.categoria || producto.categoria || 'Sin categoría'}}</h4>
                             <h4 class="p-1 text-capitalize">
                                 <b>Precio: </b>
-                                <span ng-if="producto.descuento_estado">{{producto.precio_neto_des | formatoPrecio}} <span class="badge m-1" style="background: tomato;">Descuento {{producto.descuento}}%</span></span>
-                                <span ng-if="!producto.descuento_estado">{{producto.precio_neto | formatoPrecio}}</span>
+                                <span ng-if="(productoTemporal.descuento_estado !== undefined ? productoTemporal.descuento_estado : producto.descuento_estado)">
+                                    {{productoTemporal?.precio_neto_des || producto.precio_neto_des | formatoPrecio}} 
+                                    <span class="badge m-1" style="background: tomato;">
+                                        Descuento {{productoTemporal.descuento || producto.descuento}}%
+                                    </span>
+                                </span>
+                                <span ng-if="!(productoTemporal.descuento_estado !== undefined ? productoTemporal.descuento_estado : producto.descuento_estado)">
+                                    {{productoTemporal.precio_neto || producto.precio_neto | formatoPrecio}}
+                                </span>
                             </h4>
                             <h4 class="p-1 text-capitalize">
-                                <span class="badge bg-danger" ng-if="producto.cantidad == 0">Sin Stock</span>
-                                <span class="badge bg-warning" ng-if="producto.cantidad <= 3">{{producto.cantidad}} Últimos</span>
-                                <span class="badge bg-success" ng-if="producto.cantidad > 3">Stock Disponible</span>
+                                <span class="badge bg-danger" ng-if="(productoTemporal.cantidad !== undefined ? productoTemporal.cantidad : producto.cantidad) == 0">Sin Stock</span>
+                                <span class="badge bg-warning" ng-if="(productoTemporal.cantidad !== undefined ? productoTemporal.cantidad : producto.cantidad) <= 3">
+                                    {{productoTemporal.cantidad || producto.cantidad}} Últimos
+                                </span>
+                                <span class="badge bg-success" ng-if="(productoTemporal.cantidad !== undefined ? productoTemporal.cantidad : producto.cantidad) > 3">
+                                    Stock Disponible
+                                </span>
                             </h4>
+                            <h4><b>Cantidad </b>: {{productoTemporal.cantidad || producto.cantidad}}</h4>
                         </button>
-                        <button class="btn btn-danger mx-2" ng-click="eliminarProducto(producto)"><i class="fa fa-trash"></i></button>
+
+                        <button class="btn btn-danger mx-2" ng-click="eliminar_prod(producto)"><i class="fa fa-trash"></i></button>
                     </div>
                 </h2>
                 <div id="prod-collapse{{$index}}" class="accordion-collapse collapse" aria-labelledby="heading{{$index}}" data-bs-parent="#accordionFlushExample">
@@ -33,45 +53,45 @@
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Cantidad</th>
-                                        <th ng-if="producto.descuento_estado">Valores con Descuento</th>
+                                        <th ng-if="productoTemporal.descuento_estado">Valores con Descuento</th>
                                         <th>Valores</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr style="background: #5c5d5e;">
-                                        <td>{{producto.nombre}}</td>
-                                        <td>{{producto.descripcion}}</td>
-                                        <td>{{producto.cantidad}}</td>
-                                        <td ng-if="producto.descuento_estado " class="text-end fw-bold">{{producto.precio_bruto | formatoPrecio}}</td>
-                                        <td class="text-end fw-bold">{{producto.precio_bruto | formatoPrecio}}</td>
+                                        <td>{{productoTemporal.nombre}}</td>
+                                        <td>{{productoTemporal.descripcion}}</td>
+                                        <td>{{productoTemporal.cantidad}}</td>
+                                        <td ng-if="productoTemporal.descuento_estado " class="text-end fw-bold fs-4">{{productoTemporal.precio_bruto | formatoPrecio}}</td>
+                                        <td class="text-end fw-bold fs-4">{{productoTemporal.precio_bruto | formatoPrecio}}</td>
                                     </tr>
                                     <tr style="background: #5a5a5a;">
                                         <td colspan="3" class="text-end fw-bold">Ganancia:</td>
-                                        <td ng-if="producto.descuento_estado" class="text-end text-success fw-bold">+ {{producto.precio_ganancia_des | formatoPrecio}}</td>
-                                        <td class="text-end text-success fw-bold">+ {{producto.precio_ganancia | formatoPrecio}}</td>
+                                        <td ng-if="producto.descuento_estado" class="text-end text-success fw-bold fs-4">+ {{productoTemporal.precio_ganancia_des | formatoPrecio}}</td>
+                                        <td class="text-end text-success fw-bold fs-4">+ {{productoTemporal.precio_ganancia | formatoPrecio}}</td>
                                     </tr>
                                     <tr style="background: #6b6969;">
                                         <td colspan="3" class="text-end fw-bold">IVA:</td>
-                                        <td ng-if="producto.descuento_estado" class="text-end  fw-bold">+ {{producto.precio_iva_des | formatoPrecio}}</td>
-                                        <td class="text-end fw-bold">+ {{producto.precio_iva | formatoPrecio}}</td>
+                                        <td ng-if="productoTemporal.descuento_estado" class="text-end  fw-bold fs-4">+ {{productoTemporal.precio_iva_des | formatoPrecio}}</td>
+                                        <td class="text-end fw-bold fs-4">+ {{productoTemporal.precio_iva | formatoPrecio}}</td>
                                     </tr>
                                     <tr style="background: #5a5a5a;">
                                         <td colspan="3" class="text-end fw-bold">Descuento:</td>
-                                        <td ng-if="producto.descuento_estado" class="text-end text-danger fw-bold">- {{producto.precio_descuento | formatoPrecio}}</td>
-                                        <td class="text-end fw-bold">0</td>
+                                        <td ng-if="productoTemporal.descuento_estado" class="text-end text-danger fw-bold fs-4">- {{productoTemporal.precio_descuento | formatoPrecio}}</td>
+                                        <td class="text-end fw-bold fs-4">0</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr style="background: #3d3e3f;">
                                         <td colspan="3" class="text-end fw-bold">Total:</td>
-                                        <td ng-if="producto.descuento_estado" class="text-end text-info fw-bold">{{producto.precio_neto_des | formatoPrecio}}</td>
-                                        <td class="text-end text-info fw-bold">{{producto.precio_neto | formatoPrecio}}</td>
+                                        <td ng-if="productoTemporal.descuento_estado" class="text-end text-info fw-bold">{{productoTemporal.precio_neto_des | formatoPrecio}}</td>
+                                        <td class="text-end text-info fw-bold fs-4">{{productoTemporal.precio_neto | formatoPrecio}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                         <div class="col-md-6">
-                            <div class="card">
+                            <div class="card bg-dark text-white rounded-top">
                                 <div class="card-header d-flex justify-content-between">
                                     <span>Detalles del Producto</span>
                                 </div>
@@ -82,7 +102,7 @@
                                                 <label class="col-2 col-form-label" for="nomb_prod">Nombre:</label>
                                                 <div class="col-10">
                                                     <input type="text" class="form-control" name="nombreProd" id="nomb_prod"
-                                                        ng-model="producto.nombre" required minlength="3" maxlength="50"
+                                                        ng-model="productoTemporal.nombre" required minlength="3" maxlength="50"
                                                         pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+">
                                                 </div>
                                                 <small class="text-danger text-end">
@@ -100,7 +120,7 @@
                                                 <label class="col-2 col-form-label" for="cod_prod">Codigo:</label>
                                                 <div class="col-10">
                                                     <input type="text" class="form-control" name="cogProd" id="cod_prod"
-                                                        ng-model="producto.codigo" minlength="10" maxlength="15" pattern="[a-zA-Z0-9]+"
+                                                        ng-model="productoTemporal.codigo" minlength="10" maxlength="15" pattern="[a-zA-Z0-9]+"
                                                         required>
                         
                                                 </div>
@@ -119,7 +139,7 @@
                                                 <label class="col-2 col-form-label" for="descripcion_prod">Descripcion:</label>
                                                 <div class="col-10">
                                                     <textarea class="form-control" name="descripcionProd" id="descripcion_prod" rows="5"
-                                                        cols="6" ng-model="producto.descripcion" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+"
+                                                        cols="6" ng-model="productoTemporal.descripcion" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+"
                                                         required></textarea>
                         
                                                 </div>
@@ -138,7 +158,7 @@
                                                 <label class="col-2 col-form-label" for="cat_prod">Categoria:</label>
                                                 <div class="col-10">
                                                     <input type="text" class="form-control" name="categoriaProd" id="cat_prod"
-                                                        ng-model="producto.categoria" minlength="5" maxlength="15"
+                                                        ng-model="productoTemporal.categoria" minlength="5" maxlength="15"
                                                         pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+" required>
                                                 </div>
                                                 <small class="text-danger text-end">
@@ -154,7 +174,7 @@
                                                 <label class="col-2 col-form-label" for="marca_prod">Marca:</label>
                                                 <div class="col-10">
                                                     <input type="text" class="form-control" name="marcaProd" id="marca_prod"
-                                                        ng-model="producto.marca" minlength="5" maxlength="15"
+                                                        ng-model="productoTemporal.marca" minlength="5" maxlength="15"
                                                         pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s\/]+" required>
                         
                                                 </div>
@@ -174,8 +194,8 @@
                                                 <label class="form-label" for="precio_bruto_prod">Precio bruto:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="precio_">$</span>
-                                                    <input type="number" class="form-control" ng-change="producto.precio_neto=0"
-                                                        name="preciobrProd" id="precio_bruto_prod" ng-model="producto.precio_bruto"
+                                                    <input type="number" class="form-control" ng-change="calcular(productoTemporal)"
+                                                        name="preciobrProd" id="precio_bruto_prod" ng-model="productoTemporal.precio_bruto"
                                                         aria-describedby="precio_" min="10" pattern="[0-9]+" required>
                                                 </div>
                                                 <small class="text-danger text-end">
@@ -190,8 +210,8 @@
                                             <div class="mb-3 col-3 row">
                                                 <label class="form-label" for="ganancia_prod">Ganancia:</label>
                                                 <div class="input-group">
-                                                    <input type="number" class="form-control" ng-change="calcular(producto)"
-                                                        name="gananciaProd" id="ganancia_prod" ng-model="producto.ganancia"
+                                                    <input type="number" class="form-control" ng-change="calcular(productoTemporal)"
+                                                        name="gananciaProd" id="ganancia_prod" ng-model="productoTemporal.ganancia"
                                                         aria-describedby="ganancia_" min="0" pattern="[0-9]+">
                                                     <span class="input-group-text" id="ganancia_">%</span>
                                                 </div>
@@ -204,7 +224,7 @@
                                             <div class="mb-3 col-2">
                                                 <label  class="form-label" for="cant_prod"> Cantidad :</label>
                                                 <div class="input-group">
-                                                    <input type="number" name="cantProd" class="form-control" id="cant_prod" ng-model="producto.cantidad"
+                                                    <input type="number" name="cantProd" class="form-control" id="cant_prod" ng-model="productoTemporal.cantidad"
                                                         aria-describedby="cant_" min="1" pattern="[0-9]+" required>
                                                 </div>
                                                 <small class="text-danger text-end">
@@ -216,7 +236,7 @@
                                             <div class="mb-3 col-3">
                                                 <label  class="form-label" for="select_tipo"> vender por  :</label>
                                                 <div class="input-group">
-                                                    <select class="form-select" id="select_tipo" name="tipoProd" ng-model="producto.tipoVenta" required>
+                                                    <select class="form-select" id="select_tipo" name="tipoProd" ng-model="productoTemporal.tipoVenta" required>
                                                         <option value="" disabled selected>Seleccione un tipo...</option>
                                                         <option value="unidad">Unidad</option>
                                                         <option value="metro">Metros</option>
@@ -232,19 +252,19 @@
                                             <div class="mb-3 col-1 d-flex align-items-center">
                                                 <div class="form-check form-switch mt-4">
                                                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
-                                                        ng-model="producto.descuento_estado" ng-change="producto.precio_neto=0">
+                                                        ng-model="productoTemporal.descuento_estado" ng-change="addfecha(productoTemporal)">
                                                     <label class="form-check-label" for="flexSwitchCheckDefault">Agregar descuento</label>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-12 row" ng-if="producto.descuento_estado">
+                                            <div class="mb-3 col-12 row" ng-if="producto.descuento_estado && loadfecha">
                                                 <div class="mb-3 col-3 row">
                                                     <div class="input-group">
                                                         <label class="form-label" for="descuento_prod">Descuento:</label>
                                                         <div class="input-group">
-                                                            <input type="number" class="form-control" ng-change="producto.precio_neto=0"
-                                                                name="descuentoProd" id="descuento_prod" ng-model="producto.descuento"
+                                                            <input type="number" class="form-control" ng-change="calcular(productoTemporal)"
+                                                                name="descuentoProd" id="descuento_prod" ng-model="productoTemporal.descuento"
                                                                 aria-describedby="descuento_" min="1" max="100" pattern="[0-9]+"
-                                                                ng-required="producto.descuento_estado">
+                                                                ng-required="productoTemporal.descuento_estado">
                                                             <span class="input-group-text" id="descuento_">%</span>
                                                         </div>
                                                     </div>
@@ -263,9 +283,9 @@
                                                     <label class="form-label" for="date_ini_prod">Fecha Inicio:</label>
                                                     <div class="input-group">
                                                         <input type="date" class="form-control" name="dateIniProd" id="date_ini_prod"
-                                                            ng-model="producto.fechaI" ng-change="actualizarMinFechaFinal()"
+                                                            ng-model="productoTemporal.fechaI" ng-change="actualizarMinFechaFinal()"
                                                             min="{{hoy | date:'yyyy-MM-dd'}}" aria-describedby="fechai_"
-                                                            ng-required="producto.descuento_estado">
+                                                            ng-required="productoTemporal.descuento_estado">
                                                         <span class="input-group-text" id="fechai_">
                                                             <i class="fa fa-calendar"></i>
                                                         </span>
@@ -281,8 +301,8 @@
                                                     <label class="form-label" for="date_end_prod">Fecha Final:</label>
                                                     <div class="input-group">
                                                         <input type="date" class="form-control" name="dateEndProd" id="date_end_prod"
-                                                            ng-model="producto.fechaF" min="{{producto.fechaI | date:'yyyy-MM-dd'}}"
-                                                            aria-describedby="fechaf_" ng-required="producto.descuento_estado">
+                                                            ng-model="productoTemporal.fechaF" min="{{productoTemporal.fechaI | date:'yyyy-MM-dd'}}"
+                                                            aria-describedby="fechaf_" ng-required="productoTemporal.descuento_estado">
                                                         <span class="input-group-text" id="fechaf_">
                                                             <i class="fa fa-calendar"></i>
                                                         </span>-
@@ -290,7 +310,7 @@
                                                     <small class="text-danger text-end">
                                                         <span ng-show="registroForm.dateEndProd.$error.required">La fecha de final es
                                                             requerida.</span>
-                                                        <span ng-show="producto.fechaF < producto.fechaI">La fecha de final debe ser mayor o
+                                                        <span ng-show="productoTemporal.fechaF < productoTemporal.fechaI">La fecha de final debe ser mayor o
                                                             igual a la fecha de inicio.</span>
                                                     </small>
                                                 </div>
@@ -301,9 +321,15 @@
                                                 <div class="p-2 w-100 bd-highlight"></div>
                                                 <div class="p-2 flex-shrink-1 bd-highlight">
                                                     <div class="float-end mb-3">
-                                                        <button class="btn btn-outline-info" ng-show="producto.precio_bruto > 0"
-                                                            ng-click="calcularNeto(producto.precio_bruto,producto.ganancia,producto.descuento_estado,producto.descuento)">
-                                                            Calcular <i class="fa fa-calculator"></i></button>
+                                                        
+                                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                                            <button class="btn btn-danger mx-2" ng-click="cancelarEdicion()"><i class="fa fa-close"></i> Cancelar</button>
+                                                            <button class="btn btn-outline-info" ng-show="productoTemporal.precio_bruto > 0" ng-click="actualizarProd(productoTemporal)"  ng-disabled="registroForm.$invalid || loadUpdateProd">
+                                                                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" ng-if="loadUpdateProd"></span>
+                                                                <span ng-if="loadUpdateProd == false">Actualizar</span>
+                                                                <span ng-if="loadUpdateProd"> guardando...</span>
+                                                            </button>
+                                                          </div>
                                                     </div>
                                                 </div>
                                             </div>

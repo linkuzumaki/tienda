@@ -36,6 +36,6 @@ export default function(app){
     app.get('/productos/',listaProductos);
     app.get('/productos/:id', obtenerProductoPorID);
     app.post('/guardar/producto/', crearProducto);
-    app.put('/productos/:id', actualizarProducto);
-    app.delete('/productos/:id', eliminarProducto);
+    app.put('/actualizar/producto/:id', actualizarProducto);
+    app.delete('/eliminar/producto/:id', eliminarProducto);
 }
